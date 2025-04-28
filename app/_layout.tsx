@@ -12,7 +12,6 @@ import "react-native-reanimated";
 import { TripProvider } from "./context/TripContext";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
-import HomeScreen from "./(tabs)";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -40,8 +39,11 @@ export default function RootLayout() {
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="AddTrip" options={{ headerShown: false }} />
           <Stack.Screen
-            name="TripDetailScreen/[id]"
-            options={{ headerShown: false }}
+            name="(tabs)/TripDetailScreen/[id]"
+            options={{
+              title: "Trip Details",
+              headerShown: true,
+            }}
           />
           <Stack.Screen name="+not-found" />
         </Stack>

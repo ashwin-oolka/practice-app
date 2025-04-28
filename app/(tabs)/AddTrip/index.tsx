@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   TextInput,
@@ -16,6 +16,12 @@ export default function AddTripScreen() {
 
   const { addTrip } = useTrips();
   const router = useRouter();
+
+  useEffect(() => {
+    setName("");
+    setDestination("");
+    setNotes("");
+  }, []);
 
   const handleSubmit = () => {
     if (name && destination) {

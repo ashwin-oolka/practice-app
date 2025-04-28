@@ -9,6 +9,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { useTrips } from "../context/TripContext";
+import Feather from "@expo/vector-icons/Feather";
 
 export default function HomeScreen() {
   const { trips } = useTrips();
@@ -44,5 +45,10 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, marginTop: 20 },
-  item: { padding: 15, borderBottomWidth: 1, borderColor: "#ccc" },
+  item: {
+    padding: 15,
+    borderBottomWidth: 1,
+    borderColor: "#ccc",
+    flexWrap: "wrap",
+  },
 });

@@ -2,13 +2,19 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import { useTrips } from "../../context/TripContext";
+import { Feather } from "@expo/vector-icons";
 
 export default function TripDetailScreen() {
-  const { trips } = useTrips();
+  const { trips, deleteTrip } = useTrips();
   const router = useRouter();
 
   const { id } = useLocalSearchParams();
   const trip = trips.find((trip) => trip.id === id);
+
+  const handleDelete = () => {
+    deleteTrip(String(id));
+    router.push("/(tabs)");
+  };
 
   if (!trip) {
     return (
@@ -20,16 +26,23 @@ export default function TripDetailScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{trip.name}</Text>
+      <View
+        style={{
+          justifyContent: "space-between",
+          flexDirection: "row",
+        }}
+      >
+        <Text style={styles.title}>{trip.name}</Text>
+        <Feather name="trash" size={24} color="black" onPress={handleDelete} />
+      </View>
+
       <Text style={styles.label}>Destination:</Text>
       <Text style={styles.text}>{trip.destination}</Text>
 
-      {trip.notes && (
-        <>
-          <Text style={styles.label}>Notes:</Text>
-          <Text style={styles.text}>{trip.notes || "No notes"}</Text>
-        </>
-      )}
+      <>
+        <Text style={styles.label}>Notes:</Text>
+        <Text style={styles.text}>{trip.notes || "No note"}</Text>
+      </>
 
       <View style={styles.buttonContainer}>
         <Button title="Go Back" onPress={() => router.push("/(tabs)")} />
