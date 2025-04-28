@@ -1,36 +1,48 @@
-import { Image, StyleSheet, Platform, View, Text } from "react-native";
-
-import { HelloWave } from "@/components/HelloWave";
+import { useRouter } from "expo-router";
+import React from "react";
+import {
+  View,
+  Text,
+  Button,
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import { useTrips } from "../context/TripContext";
 
 export default function HomeScreen() {
+  const { trips } = useTrips();
+  const router = useRouter();
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text style={{ fontWeight: 600, fontSize: 20 }}>Hello World</Text>
+    <View style={styles.container}>
+      <Button
+        title="Add New Trip"
+        onPress={() => router.push("/(tabs)/AddTrip")}
+      />
+      <FlatList
+        data={trips}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() =>
+              router.push({
+                pathname: "/(tabs)/TripDetailScreen",
+                params: { id: item.id },
+              })
+            }
+          >
+            <Text style={styles.item}>
+              {item.name} - {item.destination}
+            </Text>
+          </TouchableOpacity>
+        )}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
-  },
+  container: { flex: 1, padding: 20, marginTop: 20 },
+  item: { padding: 15, borderBottomWidth: 1, borderColor: "#ccc" },
 });
