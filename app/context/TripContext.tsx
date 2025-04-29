@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Trip = {
   name: string;
@@ -18,21 +18,17 @@ const TripContext = createContext<TripContextType | undefined>(undefined);
 
 export function TripProvider({ children }: { children: React.ReactNode }) {
   const [trips, setTrips] = useState<Trip[]>([]);
-  const loading = null;
 
   useEffect(() => {
     const loadStoredTrips = async () => {
       try {
-        const storedTrips = await AsyncStorage.getItem("trips");
-        if (loading.isload) {
-          return;
-        }
+        const storedTrips = await AsyncStorage.getItem('trips');
 
         if (storedTrips) {
           setTrips((prevTrips) => [...prevTrips, ...JSON.parse(storedTrips)]);
         }
       } catch (error) {
-        console.error("Error loading trips:", error);
+        console.error('Error loading trips:', error);
       }
     };
 
@@ -42,9 +38,9 @@ export function TripProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const saveTripsToStorage = async () => {
       try {
-        await AsyncStorage.setItem("trips", JSON.stringify(trips));
+        await AsyncStorage.setItem('trips', JSON.stringify(trips));
       } catch (error) {
-        console.error("Error saving trips:", error);
+        console.error('Error saving trips:', error);
       }
     };
 
@@ -60,16 +56,14 @@ export function TripProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <TripContext.Provider value={{ trips, addTrip, deleteTrip }}>
-      {children}
-    </TripContext.Provider>
+    <TripContext.Provider value={{ trips, addTrip, deleteTrip }}>{children}</TripContext.Provider>
   );
 }
 
 export function useTrips() {
   const context = useContext(TripContext);
   if (context === undefined) {
-    throw new Error("useTrips must be used within a TripProvider");
+    throw new Error('useTrips must be used within a TripProvider');
   }
   return context;
 }

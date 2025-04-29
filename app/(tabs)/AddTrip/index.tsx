@@ -3,7 +3,6 @@ import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { View, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useTrips } from '../../context/TripContext';
-const asd = null;
 
 const styles = StyleSheet.create({
   container: {
@@ -65,7 +64,6 @@ export default function AddTripScreen() {
   return (
     <View style={styles.container}>
       <TextInput style={styles.input} placeholder="Trip Name" value={name} onChangeText={setName} />
-      {asd?.asda}
       <TextInput
         style={styles.input}
         placeholder="Destination"
