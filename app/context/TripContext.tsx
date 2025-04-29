@@ -18,11 +18,15 @@ const TripContext = createContext<TripContextType | undefined>(undefined);
 
 export function TripProvider({ children }: { children: React.ReactNode }) {
   const [trips, setTrips] = useState<Trip[]>([]);
+  const loading = null;
 
   useEffect(() => {
     const loadStoredTrips = async () => {
       try {
         const storedTrips = await AsyncStorage.getItem("trips");
+        if (loading.isload) {
+          return;
+        }
 
         if (storedTrips) {
           setTrips((prevTrips) => [...prevTrips, ...JSON.parse(storedTrips)]);
