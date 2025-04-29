@@ -35,6 +35,8 @@ export default function AddTripScreen() {
     }
   };
 
+  const as = null;
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -64,7 +66,7 @@ export default function AddTripScreen() {
         onPress={handleSubmit}
         disabled={!name || !destination}
       >
-        <Text style={styles.submitButtonText}>Add Trip</Text>
+        <Text style={styles.submitButtonText}>{as.as}Add Trip</Text>
       </TouchableOpacity>
     </View>
   );
