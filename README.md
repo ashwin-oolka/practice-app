@@ -70,8 +70,7 @@ practice-app/
 ├── app/                 # Where the magic happens
 │   ├── (tabs)/         # Your tab screens live here
 │   ├── context/        # State management stuff
-│   ├── _layout.tsx     # The main layout
-│   └── +not-found.tsx  # When things go wrong
+│   └── _layout.tsx     # The main layout
 ├── assets/             # Images, fonts, etc.
 ├── scripts/            # Helper scripts
 └── ...                 # Other config files
