@@ -35,20 +35,25 @@ const styles = StyleSheet.create({
   },
 });
 
+// AddTripScreen component
 export default function AddTripScreen() {
+  // State variables for the trip details (name, destination, notes)
   const [name, setName] = useState('');
   const [destination, setDestination] = useState('');
   const [notes, setNotes] = useState('');
 
+  // Custom hook to use the TripContext
   const { addTrip } = useTrips();
   const router = useRouter();
 
+  // Reset the input fields when the component mounts
   useEffect(() => {
     setName('');
     setDestination('');
     setNotes('');
   }, []);
 
+  // Handle the submit button press
   const handleSubmit = () => {
     if (name && destination) {
       addTrip({

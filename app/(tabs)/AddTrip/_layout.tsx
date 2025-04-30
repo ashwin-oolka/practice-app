@@ -1,5 +1,6 @@
 import { Stack } from 'expo-router';
 
+// Layout component for the AddTrip screen
 const AddTripLayout = () => {
   return (
     <Stack

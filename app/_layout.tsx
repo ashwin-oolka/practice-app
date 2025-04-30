@@ -1,13 +1,14 @@
-import React from "react";
-import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
-import "react-native-reanimated";
-import { TripProvider } from "./context/TripContext";
+import React from 'react';
+import { Stack } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
+import { StatusBar } from 'expo-status-bar';
+import 'react-native-reanimated';
+import { TripProvider } from './context/TripContext';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
+// RootLayout component that provides the TripProvider and the Stack navigator
 export default function RootLayout() {
   return (
     <TripProvider>
@@ -17,7 +18,7 @@ export default function RootLayout() {
         <Stack.Screen
           name="(tabs)/TripDetailScreen/[id]"
           options={{
-            title: "Trip Details",
+            title: 'Trip Details',
             headerShown: true,
           }}
         />

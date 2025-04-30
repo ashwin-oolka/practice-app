@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import { useTrips } from '../../context/TripContext';
 import { Feather } from '@expo/vector-icons';
 
+/* eslint-disable react-native/no-color-literals */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -27,15 +28,23 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: 30,
   },
+  inlineTitleIcon: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
 });
 
+// TripDetailScreen component that displays the details of a trip
 export default function TripDetailScreen() {
+  // Custom hook to use the TripContext
   const { trips, deleteTrip } = useTrips();
   const router = useRouter();
 
+  // Get the trip ID from the URL parameters
   const { id } = useLocalSearchParams();
   const trip = trips.find((trip) => trip.id === id);
 
+  // Handle the delete button press
   const handleDelete = () => {
     deleteTrip(String(id));
     router.push('/(tabs)');
@@ -51,12 +60,7 @@ export default function TripDetailScreen() {
 
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-        }}
-      >
+      <View style={styles.inlineTitleIcon}>
         <Text style={styles.title}>{trip.name}</Text>
         <Feather name="trash" size={24} color="black" onPress={handleDelete} />
       </View>

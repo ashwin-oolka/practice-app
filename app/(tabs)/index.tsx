@@ -1,36 +1,27 @@
-import { useRouter } from "expo-router";
-import React from "react";
-import {
-  View,
-  Text,
-  Button,
-  FlatList,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
-import { useTrips } from "../context/TripContext";
+import { useRouter } from 'expo-router';
+import React from 'react';
+import { View, Text, Button, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { useTrips } from '../context/TripContext';
 
+/* eslint-disable react-native/no-color-literals */
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, marginTop: 20 },
-  // eslint-disable-next-line react-native/no-color-literals
   item: {
     padding: 15,
     borderBottomWidth: 1,
-    borderColor: "#ccc",
-    flexWrap: "wrap",
+    borderColor: '#ccc',
+    flexWrap: 'wrap',
   },
 });
 
+// HomeScreen component that displays the list of trips
 export default function HomeScreen() {
   const { trips } = useTrips();
   const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <Button
-        title="Add New Trip"
-        onPress={() => router.push("/(tabs)/AddTrip")}
-      />
+      <Button title="Add New Trip" onPress={() => router.push('/(tabs)/AddTrip')} />
       <FlatList
         data={trips}
         keyExtractor={(item, index) => index.toString()}
@@ -38,7 +29,7 @@ export default function HomeScreen() {
           <TouchableOpacity
             onPress={() =>
               router.push({
-                pathname: "/(tabs)/TripDetailScreen",
+                pathname: '/(tabs)/TripDetailScreen',
                 params: { id: item.id },
               })
             }

@@ -14,11 +14,15 @@ type TripContextType = {
   deleteTrip: (id: string) => void;
 };
 
+// Create a context for the TripContext
 const TripContext = createContext<TripContextType | undefined>(undefined);
 
+// Provider component for the TripContext
 export function TripProvider({ children }: { children: React.ReactNode }) {
+  // State to store the list of trips
   const [trips, setTrips] = useState<Trip[]>([]);
 
+  // Load trips from AsyncStorage
   useEffect(() => {
     const loadStoredTrips = async () => {
       try {
@@ -35,6 +39,7 @@ export function TripProvider({ children }: { children: React.ReactNode }) {
     loadStoredTrips();
   }, []);
 
+  // Save trips to AsyncStorage
   useEffect(() => {
     const saveTripsToStorage = async () => {
       try {
@@ -47,10 +52,12 @@ export function TripProvider({ children }: { children: React.ReactNode }) {
     saveTripsToStorage();
   }, [trips]);
 
+  // Add a new trip to the list
   const addTrip = (newTrip: Trip) => {
     setTrips((currentTrips) => [...currentTrips, newTrip]);
   };
 
+  // Delete a trip from the list
   const deleteTrip = (id: string) => {
     setTrips((currentTrips) => currentTrips.filter((trip) => trip.id !== id));
   };
@@ -60,6 +67,7 @@ export function TripProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+// Custom hook to use the TripContexts
 export function useTrips() {
   const context = useContext(TripContext);
   if (context === undefined) {
